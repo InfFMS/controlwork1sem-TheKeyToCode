@@ -42,3 +42,22 @@
 #
 # -----------------------------------------------------------------------------
 # Напишите программу ниже:
+def get_income_from_bond(purchase_price, bond_maturity_price, amount_of_one_time_coupon_payment, frequency_of_coupon_payments, broker_commission, period_until_bond_maturity):
+    commission_on_purchase = purchase_price * (broker_commission/100)
+    full_purchase_price = purchase_price + commission_on_purchase
+    total_coupon_income = amount_of_one_time_coupon_payment * (period_until_bond_maturity / frequency_of_coupon_payments)
+    total_income_before_tax = bond_maturity_price + total_coupon_income - full_purchase_price
+    if total_income_before_tax > 0:
+        income_tax = total_income_before_tax * 0.13
+    else:
+        income_tax = 0
+    net_income = (total_income_before_tax - income_tax)/full_purchase_price*100 #%
+    return net_income
+
+purchase_price = float(input("Введите цену покупки облигации: "))
+bond_maturity_price = float(input("Введите цену погашения облигации: "))
+amount_of_one_time_coupon_payment = float(input("Введите сумму разовой купонной выплаты: "))
+frequency_of_coupon_payments = int(input("Введите периодичность выплаты купонов (в месяцах): "))
+broker_commission = float(input("Введите комиссию брокера (в процентах): "))
+period_until_bond_maturity = int(input("Введите период до погашения облигации (в месяцах): "))
+print(get_income_from_bond(purchase_price, bond_maturity_price, amount_of_one_time_coupon_payment, frequency_of_coupon_payments, broker_commission, period_until_bond_maturity))
